@@ -21,6 +21,10 @@ h1 {
   width: 100%;
   justify-content: center;
 }
+.white-key-container > *{
+  position: relative;
+  z-index: 1; /* this is done to put all the white keys below the black keys, so they black keys sit on top of the white keys without the black container absorbing white key clicks*/
+}
 
 .black-key-container {
   width: 100%;
@@ -29,6 +33,18 @@ h1 {
   position: absolute;
   top: 0;
 }
+.black-key-container > *{
+  z-index: 2;
+  position: relative; /* this places the black keys above the white keys*/
+}
+.black-key-container > *:nth-child(5n+2){ /* this wil lmake every 2nd key have a gap to its right, replacing the clear key that was there which was absorbing clicks.  could have also set the clear key to -1 z-index, but that's lazy*/
+  margin-right: 15%;
+}
+ /* this wil lmake every 5th key have a gap to its right, replacing the clear key that was there which was absorbing clicks.  could have also set the clear key to -1 z-index, but that's lazy*/
+/*.black-key-container > *:nth-child(5n+5){
+  margin-right: 15%;
+}*/
+/* I added the 5n in above in case you ever wanted to add more than one octave, it would then work for say 2 octaves or more*/
 
 .flex {
   display: flex;
@@ -49,7 +65,7 @@ h1 {
   height: 400px;
   border: 1px solid black;
   box-shadow: 0 9px 6px -6px black;
-  transition: background-color 0.5s;
+  transition: background-color 0.1s;
 }
 
 .black-key {
@@ -62,72 +78,38 @@ h1 {
   box-shadow: 0 9px 6px -6px black;
   transition: background-color 0.5s;
 }
-
-.clear-key {
+/* removed this because it blocked the lower keys, but could have also set it to z-index -1 */
+/* .clear-key {
   width: 15%;
   height: 250px;
+} */
+.flex-key:hover{
+  background-color: grey;
 }
-
-#red {
+/*all flex-keys that are also "playing" class" will change to the color.
+this enables keys to get a special class which then turns on their colors*/
+.playing.flex-key:nth-child(1n){
   background-color: red;
 }
-
-.red {
-  color: red;
-}
-
-#orange {
+.playing.flex-key:nth-child(2n){
   background-color: orange;
 }
-
-.orange {
-  color: orange;
-}
-
-#yellow {
+.playing.flex-key:nth-child(3n){
   background-color: yellow;
 }
-
-.yellow {
-  color: yellow;
+.playing.flex-key:nth-child(4n){
+  background-color: red;
 }
-
-#green {
-  background-color: green;
-}
-
-.green {
-  color: green;
-}
-
-#blue {
+.playing.flex-key:nth-child(5n){
   background-color: blue;
 }
-
-.blue {
-  color: blue;
-}
-
-#indigo {
+.playing.flex-key:nth-child(6n){
   background-color: indigo;
 }
-
-.indigo {
-  color: indigo;
-}
-
-#violet {
+.playing.flex-key:nth-child(7n){
   background-color: violet;
 }
 
-.violet {
-  color: violet;
-}
-
-#playing {
-  background-color: white;
-  color: black;
-}
 
 @media screen and (max-width: 830px) and (orientation: landscape) {
   h1 {
